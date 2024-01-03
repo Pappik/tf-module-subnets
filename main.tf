@@ -13,7 +13,7 @@ resource "aws_route_table" "route_table" {
 
 
   route {
-    ipv6_cidr_block        = data.aws_vpc.default.cidr_block
+    cidr_block        = data.aws_vpc.default.cidr_block
     vpc_peering_connection_id = var.vpc_peering_connection_id
   }
 
