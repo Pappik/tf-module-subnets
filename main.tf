@@ -1,4 +1,4 @@
-resource "aws_subnet" "main" {
+resource "aws_subnet" "subnets" {
   count  = length(var.cidr_block)
   cidr_block = var.cidr_block[count.index]
   availability_zone = var.availability_zone[count.index]
@@ -20,7 +20,7 @@ resource "aws_route_table" "route_table" {
   tags = merge(local.common_tags, { Name = "${var.env}-${var.name}-route_table" } )
 }
 
-resource "aws_route_table_association" "main" {
+resource "aws_route_table_association" "route-assoc" {
   count          = length(aws_subnet.main)
   subnet_id      = aws_subnet.main.*.id[count.index]
   route_table_id = aws_route_table.route_table.id
